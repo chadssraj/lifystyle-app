@@ -50,7 +50,7 @@ export default function SellerScreen(props) {
             <li>
               <Rating
                 rating={user.seller.rating}
-                numReviews={user.seller.numReviews}
+                numReviews={user.seller.numReview}
               ></Rating>
             </li>
             <li>
