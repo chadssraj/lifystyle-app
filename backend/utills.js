@@ -49,7 +49,7 @@ export const isSeller = (req, res, next) => {
   if (req.user && req.user.isSeller) {
     next();
   } else {
-    res.status(401).send({ message: "Invalid admin token" });
+    res.status(401).send({ message: "Invalid seller token" });
   }
 };
 export const isSellerOrAdmin = (req, res, next) => {

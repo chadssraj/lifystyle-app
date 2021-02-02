@@ -2,7 +2,7 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import data from "../data.js";
 import Product from "../models/productModel.js";
-import { isAdmin, isAuth, isSellerOrAdmin } from "../utills.js";
+import { isAdmin, isAuth, isSeller, isSellerOrAdmin } from "../utills.js";
 
 const productRouter = express.Router();
 
@@ -46,7 +46,6 @@ productRouter.post(
   "/",
   isAuth,
   isSellerOrAdmin,
-  isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: "samle name " + Date.now(),
