@@ -2,14 +2,19 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import data from "../data.js";
 import Product from "../models/productModel.js";
-import { isAdmin, isAuth } from "../utills.js";
+import { isAdmin, isAuth, isSellerOrAdmin } from "../utills.js";
 
 const productRouter = express.Router();
 
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const seller = req.query.seller || "";
+    const sellerFilter = seller ? { seller } : {};
+    const products = await Product.find({ ...sellerFilter }).populate(
+      "seller",
+      "seller.name seller.logo"
+    );
     res.send(products);
   })
 );
@@ -25,7 +30,10 @@ productRouter.get(
 productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).populate(
+      "seller",
+      "seller.name seller.logo seller.rating seller.numReview"
+    );
     if (product) {
       res.send(product);
     } else {
@@ -37,10 +45,12 @@ productRouter.get(
 productRouter.post(
   "/",
   isAuth,
+  isSellerOrAdmin,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = new Product({
       name: "samle name " + Date.now(),
+      seller: req.user._id,
       image: "/images/p1.jpg",
       peice: 0,
       category: "sample category",
@@ -79,16 +89,16 @@ productRouter.put(
 );
 
 productRouter.delete(
-  '/:id',
+  "/:id",
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
       const deleteProduct = await product.remove();
-      res.send({ message: 'Product Deleted', product: deleteProduct });
+      res.send({ message: "Product Deleted", product: deleteProduct });
     } else {
-      res.status(404).send({ message: 'Product Not Found' });
+      res.status(404).send({ message: "Product Not Found" });
     }
   })
 );
