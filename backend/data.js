@@ -20,6 +20,7 @@ const data = {
     {
      
       name: "Nike Slim Shirt",
+      seller:"",
       category: "shirts",
       image: "/images/product-1.jpg",
       peice: 120,
@@ -32,6 +33,7 @@ const data = {
     {
       
       name: "Adidas Fit  Shirt",
+      seller:"",
       category: "shirts",
       image: "/images/product-2.jpg",
       peice: 150,
@@ -44,6 +46,7 @@ const data = {
     {
     
       name: "Lacoste Free Shirt",
+      seller:"",
       category: "shirts",
       image: "/images/product-3.jpg",
       peice: 100,
@@ -56,6 +59,7 @@ const data = {
     {
     
       name: "Nike Slim Pant",
+      seller:"",
       category: "Pants",
       image: "/images/product-4.jpg",
       peice: 80,
@@ -68,6 +72,7 @@ const data = {
     {
     
       name: "Puma Slim pant",
+      seller:"",
       category: "Pants",
       image: "/images/product-5.jpg",
       peice: 180,
@@ -79,6 +84,7 @@ const data = {
     },
     {
       name: "Adidas Slim pant",
+      seller:"",
       category: "Pants",
       image: "/images/product-7.jpg",
       peice: 70,
@@ -91,6 +97,7 @@ const data = {
     {
     
       name: "Lee Slim pant",
+      seller:"",
       category: "Pants",
       image: "/images/product-7.jpg",
       peice: 70,
